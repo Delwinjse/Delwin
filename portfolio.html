@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Creative Strategy Portfolio — Delwin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root { --bg:#0a0a09;--surface:#111110;--surface-2:#1a1a18;--border:#2a2a27;--accent:#c8a96e;--text:#e8e5de;--text-muted:#7a7870;--text-dim:#4a4845;--video-bg:#0d0d0c; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;border-bottom:1px solid var(--border);background:rgba(10,10,9,0.85);backdrop-filter:blur(12px)}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none}
+  .nav-logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--accent)}
+  .hero{display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 3rem 5rem;position:relative;overflow:hidden}
+  .hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(200,169,110,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black,transparent)}
+  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.7s 0.1s ease forwards}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,8vw,7.5rem);font-weight:900;line-height:0.95;letter-spacing:-0.02em;max-width:900px;opacity:0;animation:fadeUp 0.7s 0.2s ease forwards}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero-sub{margin-top:2rem;font-size:1rem;color:var(--text-muted);max-width:480px;line-height:1.7;opacity:0;animation:fadeUp 0.7s 0.35s ease forwards}
+  .hero-scroll{position:absolute;bottom:2rem;right:3rem;display:flex;align-items:center;gap:0.75rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);writing-mode:vertical-rl}
+  .hero-scroll::before{content:'';display:block;width:1px;height:60px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease-in-out infinite}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+  .section{padding:6rem 3rem;border-top:1px solid var(--border)}
+  .section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem}
+  .section-label{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1}
+  .section-count{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.1em}
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;align-items:start}
+  .video-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:transform 0.3s ease,border-color 0.3s ease}
+  .video-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .video-wrapper{position:relative;background:var(--video-bg);overflow:hidden;width:100%}
+  .video-wrapper video{display:block;width:100%;height:auto;object-fit:contain}
+  .video-empty{width:100%;aspect-ratio:9/16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;border:2px dashed var(--border)}
+  .video-empty-icon{font-size:1.8rem;color:var(--text-dim)}
+  .video-empty-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--text-dim);text-align:center;line-height:2;padding:0 1.2rem}
+  .video-empty-label code{display:block;margin-top:0.4rem;color:var(--accent);font-size:0.58rem;word-break:break-all}
+  .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);transition:background 0.25s;cursor:pointer}
+  .play-overlay.playing{background:rgba(0,0,0,0);opacity:0}
+  .play-overlay.playing:hover{background:rgba(0,0,0,0.25);opacity:1}
+  .play-btn{width:60px;height:60px;border-radius:50%;background:rgba(200,169,110,0.15);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.3rem;backdrop-filter:blur(6px);transition:transform 0.2s,background 0.2s;pointer-events:none}
+  .play-overlay:hover .play-btn{transform:scale(1.1);background:rgba(200,169,110,0.25)}
+  .play-overlay .icon-play{display:block}.play-overlay .icon-pause{display:none}
+  .play-overlay.playing .icon-play{display:none}.play-overlay.playing .icon-pause{display:block}
+  .creative-panel{padding:1.5rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.2rem}
+  .panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+  .ad-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;line-height:1.3}
+  .ad-tags{display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end}
+  .tag{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.2);padding:0.2rem 0.5rem;border-radius:2px}
+  .spend-row{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.8rem;background:var(--surface-2);border:1px solid var(--border);border-radius:3px}
+  .spend-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim)}
+  .spend-value{font-family:'DM Mono',monospace;font-size:1rem;font-weight:500;color:var(--accent)}
+  .accordion-trigger{display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:none;border:none;border-top:1px solid var(--border);padding-top:1rem;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;width:100%;text-align:left;transition:color 0.2s}
+  .accordion-trigger:hover{color:var(--accent)}
+  .accordion-icon{transition:transform 0.3s}
+  .accordion-trigger.open .accordion-icon{transform:rotate(45deg)}
+  .accordion-body{display:none;padding-top:1rem}
+  .accordion-body.open{display:block}
+  .rationale-text{font-size:0.8rem;color:var(--text-muted);line-height:1.7}
+  .rationale-text strong{color:var(--text);font-weight:600}
+  .static-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem}
+  .static-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:transform 0.3s ease,border-color 0.3s ease;cursor:pointer}
+  .static-card:hover{transform:translateY(-3px);border-color:rgba(200,169,110,0.5)}
+  .image-wrapper{position:relative;aspect-ratio:1/1;background:var(--video-bg);overflow:hidden}
+  .image-wrapper img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
+  .static-card:hover .image-wrapper img{transform:scale(1.03)}
+  .image-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;border:2px dashed var(--border)}
+  .image-empty-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--text-dim);text-align:center;line-height:2;padding:0 1rem}
+  .image-empty-label code{color:var(--accent);font-size:0.58rem;word-break:break-all}
+  .static-meta{padding:1rem 1rem 1.2rem;display:flex;flex-direction:column;gap:0.4rem}
+  .static-title{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;line-height:1.3}
+  .static-desc{font-size:0.75rem;color:var(--text-muted);line-height:1.6}
+  .static-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.3rem}
+  /* image lightbox */
+  .img-lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;display:none;align-items:center;justify-content:center;padding:2rem}
+  .img-lightbox-overlay.active{display:flex}
+  .img-lightbox-inner{position:relative;max-height:90vh;max-width:90vw}
+  .img-lightbox-inner img{max-height:90vh;max-width:90vw;width:auto;height:auto;display:block;border-radius:4px}
+  .img-lightbox-close{position:absolute;top:-2.5rem;right:0;background:none;border:none;color:var(--text-muted);font-size:0.9rem;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:0.08em;transition:color 0.2s}
+  .img-lightbox-close:hover{color:var(--accent)}
+  .cta-section{border-top:1px solid var(--border);padding:8rem 3rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2.5rem;position:relative;overflow:hidden}
+  .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(200,169,110,0.07),transparent);pointer-events:none}
+  .cta-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)}
+  .cta-headline{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-0.02em;max-width:800px}
+  .cta-headline em{font-style:italic;color:var(--accent)}
+  .cta-sub{font-size:1rem;color:var(--text-muted);max-width:440px;line-height:1.7}
+  .cta-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:0.5rem}
+  .cta-btn{display:inline-flex;align-items:center;gap:0.6rem;text-decoration:none;font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:1rem 2rem;border-radius:4px;border:1.5px solid transparent;transition:all 0.25s ease;font-weight:500}
+  .cta-btn--email{background:var(--accent);color:#0a0a09;border-color:var(--accent)}
+  .cta-btn--email:hover{background:#e8c98e;border-color:#e8c98e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,110,0.25)}
+  .cta-btn--x{background:transparent;color:var(--text);border-color:var(--border)}
+  .cta-btn--x:hover{border-color:var(--text-muted);background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;display:none;align-items:center;justify-content:center;padding:2rem}
+  .modal-overlay.active{display:flex}
+  .modal-inner{position:relative;max-height:90vh;max-width:90vw;background:#000;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .modal-inner video{max-height:90vh;max-width:90vw;width:auto;height:auto;display:block}
+  .modal-close{position:absolute;top:-2.5rem;right:0;background:none;border:none;color:var(--text-muted);font-size:0.9rem;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:0.08em;transition:color 0.2s}
+  .modal-close:hover{color:var(--accent)}
+  .vid-btn{position:absolute;width:34px;height:34px;border-radius:50%;background:rgba(10,10,9,0.7);border:1px solid rgba(200,169,110,0.4);color:var(--accent);display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);opacity:0;transition:opacity 0.2s,background 0.2s,transform 0.2s;z-index:10}
+  .video-wrapper:hover .vid-btn{opacity:1}
+  .vid-btn:hover{background:rgba(200,169,110,0.2);transform:scale(1.1)}
+  .vid-btn svg{pointer-events:none}
+  .fullscreen-btn{bottom:0.75rem;right:0.75rem}
+  .mute-btn{bottom:0.75rem;right:3.25rem}
+  .mute-btn .icon-unmuted{display:none}
+  .mute-btn.unmuted .icon-muted{display:none}
+  .mute-btn.unmuted .icon-unmuted{display:block}
+  footer{border-top:1px solid var(--border);padding:3rem;display:flex;justify-content:space-between;align-items:center}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+  .footer-brand span{color:var(--accent)}
+  .footer-copy{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.08em}
+  @media(max-width:1024px){.video-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}.nav-links{display:none}
+    .hero,.section{padding-left:1.5rem;padding-right:1.5rem}
+    .video-grid{grid-template-columns:1fr}
+    .static-grid{grid-template-columns:repeat(2,1fr)}
+    .cta-section{padding:5rem 1.5rem}
+    .cta-buttons{flex-direction:column;align-items:center}
+    .cta-btn{width:100%;max-width:300px;justify-content:center}
+    footer{flex-direction:column;gap:1rem;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Delwin<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#video-ads">Video Ads</a></li>
+    <li><a href="#static-ads">Static Ads</a></li>
+    <li><a href="mailto:delwin@delwinjose.com">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-lines"></div>
+  <p class="hero-eyebrow">Creative Strategy &middot; Direct Response Copywriting &middot; Meta Media Buying</p>
+  <h1>Creative <em>Strategy</em></h1>
+  <p class="hero-sub">A selection of performance paid social ads ideated and written by myself.</p>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<section class="section" id="video-ads">
+  <div class="section-header">
+    <div><p class="section-label">01 &mdash; Video Ads</p><h2 class="section-title">Video Creatives</h2></div>
+    <span class="section-count">06 ads</span>
+  </div>
+  <div class="video-grid">
+    <div class="video-card">
+      <div class="video-wrapper">
+        <video src="assets/vid/kyle.mp4" muted playsinline preload="metadata"></video>
+        <div class="play-overlay" onclick="togglePlay(this)"><div class="play-btn"><span class="icon-play">&#9654;</span><span class="icon-pause">&#10074;&#10074;</span></div></div>
+        <button class="vid-btn fullscreen-btn" onclick="goFullscreen(this)" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        <button class="vid-btn mute-btn" onclick="toggleMute(this)" title="Unmute"><svg class="icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><svg class="icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+      </div>
+      <div class="creative-panel">
+        <div class="panel-top"><div class="ad-title">Zencortex &mdash; Kyle Story</div><div class="ad-tags"><span class="tag">TOF</span><span class="tag">Story Lead</span></div></div>
+        <div class="spend-row"><span class="spend-label">Spend</span><span class="spend-value">$35.4K</span></div>
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">Creative Rationale <span class="accordion-icon">+</span></button>
+        <div class="accordion-body"><p class="rationale-text">Aggressive ad featuring a story lead blended with the authority of the news format. This was inspired by MindValley&#39;s &#34;Silva method&#34; VSL which was one of the best performing VSLs on youtube for a long time. This ad was competing in a very saturated market of clickbank products with low trust. I decided to use an emotional story lead to bypass the high levels of resistance/banner blindness this market has. The news format was used to lend authority, but also because it was similar to videos the older demographic we were targeting might natively see on their feed. Additionally, my research showed that most of this audience was being bombarded with ads of the same style (mini VSL) and after not having success with that format, I tested this ad to break through the noise as comments as results suggested the market had developed banner blindness to the mini VSL type ad.</p></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-wrapper">
+        <video src="assets/vid/nobel.mp4" muted playsinline preload="metadata"></video>
+        <div class="play-overlay" onclick="togglePlay(this)"><div class="play-btn"><span class="icon-play">&#9654;</span><span class="icon-pause">&#10074;&#10074;</span></div></div>
+        <button class="vid-btn fullscreen-btn" onclick="goFullscreen(this)" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        <button class="vid-btn mute-btn" onclick="toggleMute(this)" title="Unmute"><svg class="icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><svg class="icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+      </div>
+      <div class="creative-panel">
+        <div class="panel-top"><div class="ad-title">Zencortex &mdash; Nobel Prize Winning Treatment</div><div class="ad-tags"><span class="tag">TOF</span><span class="tag">Story Lead</span></div></div>
+        <div class="spend-row"><span class="spend-label">Spend</span><span class="spend-value">$124.1K</span></div>
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">Creative Rationale <span class="accordion-icon">+</span></button>
+        <div class="accordion-body"><p class="rationale-text">After seeing some success with the &#34;Kyle&#34; video, I decided to take the aspects of the video that worked and improve it. I kept it as a story lead but made it more emotional to have more impact. The &#34;nobel prize&#34; angle was used to lend authority/credibility in a skeptical market and aligned well with the VSL which we were sending the traffic to. Although the hook worked well on the &#34;Kyle&#34; video, I saw that there was room for improvement and wanted a more gripping hook that would not only capture attention but get them interested in the video. I went with a hook style seen in some popular organic videos and used an emotional opener.</p></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-wrapper">
+        <video src="assets/vid/histrips.mp4" muted playsinline preload="metadata"></video>
+        <div class="play-overlay" onclick="togglePlay(this)"><div class="play-btn"><span class="icon-play">&#9654;</span><span class="icon-pause">&#10074;&#10074;</span></div></div>
+        <button class="vid-btn fullscreen-btn" onclick="goFullscreen(this)" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        <button class="vid-btn mute-btn" onclick="toggleMute(this)" title="Unmute"><svg class="icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><svg class="icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+      </div>
+      <div class="creative-panel">
+        <div class="panel-top"><div class="ad-title">HiStrips &mdash; Athletic Performance Breakthrough</div><div class="ad-tags"><span class="tag">MOF</span><span class="tag">AI UGC - Podcast</span></div></div>
+        <div class="spend-row"><span class="spend-label">Spend</span><span class="spend-value">NEW</span></div>
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">Creative Rationale <span class="accordion-icon">+</span></button>
+        <div class="accordion-body"><p class="rationale-text">Completely produced by myself including AI asset generation and editing. The podcast style was chosen for authority, but also my research suggested that this was a format that the audience natively consumed. Using the book &#34;breath&#34; was chosen to give some scientific credibility to an audience that is younger, more informed and likely to want research backing up their decisions. The split screen hook was chosen as I had seen it perform well natively on podcast videos, and we had a great asset to use for this that created curiosity when combined with the hook.</p></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-wrapper">
+        <video src="assets/vid/snoring.mp4" muted playsinline preload="metadata"></video>
+        <div class="play-overlay" onclick="togglePlay(this)"><div class="play-btn"><span class="icon-play">&#9654;</span><span class="icon-pause">&#10074;&#10074;</span></div></div>
+        <button class="vid-btn fullscreen-btn" onclick="goFullscreen(this)" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        <button class="vid-btn mute-btn" onclick="toggleMute(this)" title="Unmute"><svg class="icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><svg class="icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+      </div>
+      <div class="creative-panel">
+        <div class="panel-top"><div class="ad-title">HiStrips &mdash; Snoring Partner</div><div class="ad-tags"><span class="tag">TOF</span><span class="tag">AI UGC - Podcast</span></div></div>
+        <div class="spend-row"><span class="spend-label">Spend</span><span class="spend-value">NEW</span></div>
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">Creative Rationale <span class="accordion-icon">+</span></button>
+        <div class="accordion-body"><p class="rationale-text">Completely produced by myself including AI asset generation and editing. Podcast ads were performing really well for this client so decided to double down and focus on them more. Instead of using it for authority, I decided to use the podcast format to give a feeling of an authentic conversation, rather than a polished sales pitch. This product was great because it had multiple benefits so I could really test a lot of different avatars/pain points with it. I went with this angle of &#34;wife nearly left me because of my snoring&#34; as my research suggested its one of the biggest fears of the market. It also made for a strong hook and an emotional story.</p></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-wrapper">
+        <video src="assets/vid/prostate.mp4" muted playsinline preload="metadata"></video>
+        <div class="play-overlay" onclick="togglePlay(this)"><div class="play-btn"><span class="icon-play">&#9654;</span><span class="icon-pause">&#10074;&#10074;</span></div></div>
+        <button class="vid-btn fullscreen-btn" onclick="goFullscreen(this)" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        <button class="vid-btn mute-btn" onclick="toggleMute(this)" title="Unmute"><svg class="icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><svg class="icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+      </div>
+      <div class="creative-panel">
+        <div class="panel-top"><div class="ad-title">FlowForce Max &mdash; Candy Hack</div><div class="ad-tags"><span class="tag">TOF</span><span class="tag">Mini VSL</span></div></div>
+        <div class="spend-row"><span class="spend-label">Spend</span><span class="spend-value">$12.2K</span></div>
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">Creative Rationale <span class="accordion-icon">+</span></button>
+        <div class="accordion-body"><p class="rationale-text">One of the earlier ads I&#39;ve produced/wrote. This ad was for a VSL funnel so the aim was to drive as much curiosity as possible to get them to click the link and watch the VSL, hence the idea of a &#34;weird candy hack that can shrink your prostate&#34;. Very much designed for a TOF/cold audience the aim was to get as many people into the funnel as possible where the VSL will do the selling.</p></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-wrapper">
+        <video src="assets/vid/awaab.mp4" muted playsinline preload="metadata"></video>
+        <div class="play-overlay" onclick="togglePlay(this)"><div class="play-btn"><span class="icon-play">&#9654;</span><span class="icon-pause">&#10074;&#10074;</span></div></div>
+        <button class="vid-btn fullscreen-btn" onclick="goFullscreen(this)" title="Fullscreen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        <button class="vid-btn mute-btn" onclick="toggleMute(this)" title="Unmute"><svg class="icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><svg class="icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+      </div>
+      <div class="creative-panel">
+        <div class="panel-top"><div class="ad-title">Housing Disrepair &mdash; Awaab</div><div class="ad-tags"><span class="tag">TOF</span><span class="tag">Story Lead</span></div></div>
+        <div class="spend-row"><span class="spend-label">Spend</span><span class="spend-value">$3.1K</span></div>
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">Creative Rationale <span class="accordion-icon">+</span></button>
+        <div class="accordion-body"><p class="rationale-text">For a lead gen campaign, targeting people living in council houses in the UK. The real story of Awaab was used for emotional effect, encouraging the viewer to take action as many felt the problem wasn&#39;t serious enough to take action. The market wasn&#39;t very saturated but it was skeptical so social proof of someone actually getting results was included as well as mentioning the legal act that caused the change (force of nature).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="static-ads">
+  <div class="section-header">
+    <div><p class="section-label">02 &mdash; Static Ads</p><h2 class="section-title">1&times;1 Static Creatives</h2></div>
+    <span class="section-count">09 ads</span>
+  </div>
+  <div class="static-grid">
+    <div class="static-card" onclick="openImgLightbox('assets/img/check-this.png')">
+      <div class="image-wrapper"><img src="assets/img/check-this.png" alt="Lottery &mdash; Check This" /></div>
+      <div class="static-meta">
+        <div class="static-title">Lottery Defeater &mdash; Check This</div>
+        <div class="static-tags"><span <span class="tag">Clickbait</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/ear-wax.png')">
+      <div class="image-wrapper"><img src="assets/img/ear-wax.png" alt="Ear Wax Removal &mdash; Curiosity Hook" /></div>
+      <div class="static-meta">
+        <div class="static-title">Zencortex &mdash; Ear Wax Quiz</div>
+        <div class="static-tags"><span <span class="tag">Clickbait</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/uterine.png')">
+      <div class="image-wrapper"><img src="assets/img/uterine.png" alt="Women&#39;s Health &mdash; Uterine" /></div>
+      <div class="static-meta">
+        <div class="static-title">Legal - Hair relaxer Claims</div>
+        <div class="static-tags"><span <span class="tag">Lead Gen</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/ai-tech.png')">
+      <div class="image-wrapper"><img src="assets/img/ai-tech.png" alt="AI Tech &mdash; Should This Be Legal?" /></div>
+      <div class="static-meta">
+        <div class="static-title">Lottery Defeater &mdash; AI</div>
+        <div class="static-tags"><span <span class="tag">Mechanistic Ad</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/coffee.png')">
+      <div class="image-wrapper"><img src="assets/img/coffee.png" alt="Coffee &mdash; Check The Next Time" /></div>
+      <div class="static-meta">
+        <div class="static-title">Fitspresso &mdash; Starbucks Secret</div>
+        <div class="static-tags"><span <span class="tag">Mechanistic Ad</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/afff.png')">
+      <div class="image-wrapper"><img src="assets/img/afff.png" alt="AFFF &mdash; Military Lawsuit" /></div>
+      <div class="static-meta">
+        <div class="static-title">Legal - AFFF Claims </div>
+        <div class="static-tags"><span <span class="tag">Lead Gen</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/carb.png')">
+      <div class="image-wrapper"><img src="assets/img/carb.png" alt="Weight Loss &mdash; Carb Hack" /></div>
+      <div class="static-meta">
+        <div class="static-title">Puravive &mdash; Carb Hack</div>
+        <div class="static-tags"><span <span class="tag">Clickbait</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/brain.png')">
+      <div class="image-wrapper"><img src="assets/img/brain.png" alt="Brain Health &mdash; Guide to Tomatoes" /></div>
+      <div class="static-meta">
+        <div class="static-title">Zencortex &mdash; Brain Health</div>
+        <div class="static-tags"><span <span class="tag">Urgency</span></div>
+      </div>
+    </div>
+    <div class="static-card" onclick="openImgLightbox('assets/img/judge.png')">
+      <div class="image-wrapper"><img src="assets/img/judge.png" alt="Legal &mdash; Judge Authority" /></div>
+      <div class="static-meta">
+        <div class="static-title">Lottery Defeater &mdash; Judge Authority</div>
+        <div class="static-tags"><span <span class="tag">Authority</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <p class="cta-eyebrow">03 &mdash; Let&#39;s Work</p>
+
+  <div class="cta-buttons">
+    <a class="cta-btn cta-btn--email" href="mailto:delwin@delwinjose.com">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      delwin@delwinjose.com
+    </a>
+    <a class="cta-btn cta-btn--x" href="https://x.com/ColdTrafficking" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      @ColdTrafficking
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Delwin<span>.</span></div>
+  <div class="footer-copy">Direct Response &middot; Creative Strategy &middot; Meta Ads</div>
+</footer>
+
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-inner">
+    <button class="modal-close" id="modal-close-btn">&#10005; close</button>
+    <video id="modal-video" controls playsinline></video>
+  </div>
+</div>
+
+<div class="img-lightbox-overlay" id="img-lightbox" onclick="closeImgLightbox(event)">
+  <div class="img-lightbox-inner">
+    <button class="img-lightbox-close" id="img-lightbox-close">&#10005; close</button>
+    <img id="img-lightbox-img" src="" alt="" />
+  </div>
+</div>
+
+<script>
+  function toggleAccordion(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+  function togglePlay(overlay){
+    const video=overlay.previousElementSibling;
+    if(!video||video.tagName!=='VIDEO')return;
+    document.querySelectorAll('.video-wrapper video').forEach(v=>{if(v!==video){v.pause();const o=v.nextElementSibling;if(o&&o.classList.contains('play-overlay'))o.classList.remove('playing')}});
+    if(video.paused){video.play();overlay.classList.add('playing')}else{video.pause();overlay.classList.remove('playing')}
+    video.onended=()=>overlay.classList.remove('playing')
+  }
+  function toggleMute(btn){
+    const video=btn.closest('.video-wrapper').querySelector('video');
+    if(!video)return;
+    video.muted=!video.muted;
+    btn.classList.toggle('unmuted',!video.muted);
+    btn.title=video.muted?'Unmute':'Mute'
+  }
+  function goFullscreen(btn){
+    const wrapper=btn.closest('.video-wrapper');const video=wrapper.querySelector('video');if(!video)return;
+    if(video.paused){
+      document.querySelectorAll('.video-wrapper video').forEach(v=>{if(v!==video){v.pause();const o=v.nextElementSibling;if(o&&o.classList.contains('play-overlay'))o.classList.remove('playing')}});
+      video.play();const overlay=wrapper.querySelector('.play-overlay');if(overlay)overlay.classList.add('playing')
+    }
+    if(video.requestFullscreen)video.requestFullscreen();
+    else if(video.webkitRequestFullscreen)video.webkitRequestFullscreen();
+    else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen()
+  }
+  function openModal(src){const v=document.getElementById('modal-video');v.src=src;document.getElementById('modal').classList.add('active');v.play()}
+  function closeModal(e){if(e&&e.target!==document.getElementById('modal'))return;_closeModal()}
+  function _closeModal(){const v=document.getElementById('modal-video');v.pause();v.src='';document.getElementById('modal').classList.remove('active')}
+  document.getElementById('modal-close-btn').addEventListener('click',_closeModal);
+  function openImgLightbox(src){document.getElementById('img-lightbox-img').src=src;document.getElementById('img-lightbox').classList.add('active')}
+  function closeImgLightbox(e){if(e&&e.target!==document.getElementById('img-lightbox'))return;_closeImgLightbox()}
+  function _closeImgLightbox(){document.getElementById('img-lightbox-img').src='';document.getElementById('img-lightbox').classList.remove('active')}
+  document.getElementById('img-lightbox-close').addEventListener('click',_closeImgLightbox);
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target)}})},{threshold:0.08});
+  document.querySelectorAll('.video-card,.static-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.6s ease,transform 0.6s ease';io.observe(el)});
+</script>
+</body>
+</html>
